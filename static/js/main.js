@@ -97,16 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Optionally register ScrollSmoother if available
-    if (typeof ScrollSmoother !== 'undefined') {
-      gsap.registerPlugin(ScrollSmoother);
-      ScrollSmoother.create({
-        smooth: 1.2,
-        effects: true,
-        smoothTouch: 0.1
-      });
-    }
-
     /* Hero entrance */
     const heroTl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.8 } });
     heroTl
@@ -115,17 +105,14 @@ document.addEventListener('DOMContentLoaded', () => {
       .from('.hero-subtitle', { y: 20, opacity: 0 }, '-=0.5')
       .from('.hero-actions', { y: 20, opacity: 0 }, '-=0.4');
 
-    /* Stats counter animation */
-    document.querySelectorAll('.stat-item h3').forEach(el => {
-      const target = el.textContent;
-      ScrollTrigger.create({
-        trigger: el,
-        start: 'top 85%',
-        once: true,
-        onEnter: () => {
-          el.style.opacity = '1';
-        }
-      });
+    /* Stats reveal animation */
+    ScrollTrigger.batch('.stat-item', {
+      onEnter: batch => gsap.fromTo(batch,
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: 'power2.out' }
+      ),
+      start: 'top 85%',
+      once: true
     });
 
     /* Generic reveal for sections */
