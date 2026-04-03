@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RoleFit - Analyze your resume fit for job positions with AI-powered insights, personalized cover letters, and match scoring.">
+    <meta name="keywords" content="resume analyzer, job match, career analysis, cover letter generator">
+    <meta property="og:title" content="RoleFit - Your AI-Powered Career Match Platform">
+    <meta property="og:description" content="Discover how well your resume matches job opportunities with AI-powered analysis.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#1e40af">
+    <title>RoleFit - AI Resume & Job Match Analyzer</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="navbar">
+    <div class="container">
+        <div class="navbar-brand">
+            <h1>RoleFit</h1>
+        </div>
+        <nav class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+        </nav>
+    </div>
+</header>
+<section class="hero">
+    <div class="container hero-content">
+        <div class="hero-text">
+            <h1>Your AI-Powered Career Match Platform</h1>
+            <p>Analyze your resume against job descriptions. Get insights, match scores, and AI-generated cover letters in seconds.</p>
+            <button class="cta-button" onclick="document.querySelector('.upload-section').scrollIntoView({behavior: 'smooth'})">Get Started</button>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-card card-1"><span>95% Match</span></div>
+            <div class="floating-card card-2"><span>Cover Letter Ready</span></div>
+            <div class="floating-card card-3"><span>Instant Analysis</span></div>
+        </div>
+    </div>
+</section>
+<section class="upload-section" id="features">
+    <div class="container">
+        <h2>Analyze Your Fit</h2>
+        <div class="form-container">
+            <form action="/analyze" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="resume">Upload Your Resume (PDF)</label>
+                    <input type="file" id="resume" name="resume" accept=".pdf" required>
+                    <div class="file-hint">Max 10MB • PDF format</div>
+                </div>
+                <div class="form-group">
+                    <label for="job_input">Job Description or URL</label>
+                    <textarea id="job_input" name="job_input" rows="8" placeholder="Paste the job description or enter a URL..." required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Analyze Match</button>
+            </form>
+        </div>
+    </div>
+</section>
+<section class="features" id="how-it-works">
+    <div class="container">
+        <h2>How It Works</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📄</div>
+                <h3>Upload Resume</h3>
+                <p>Submit your PDF resume for analysis</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Add Job Details</h3>
+                <p>Paste job description or URL</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Analysis</h3>
+                <p>Get instant AI-powered insights</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Match Score</h3>
+                <p>See your compatibility percentage</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✍️</div>
+                <h3>Cover Letter</h3>
+                <p>Get personalized cover letter</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💡</div>
+                <h3>Recommendations</h3>
+                <p>Get actionable improvements</p>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2026 RoleFit. Empowering careers with AI.</p>
+    </div>
+</footer>
+</body>
+</html>
