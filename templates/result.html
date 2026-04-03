@@ -1,60 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Your RoleFit analysis results with AI-generated insights and personalized cover letter.">
-    <title>Your RoleFit Results</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your RoleFit match analysis — score, insights, and personalized cover letter.">
+  <title>Your Results — RoleFit</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="navbar">
-        <div class="container">
-            <div class="navbar-brand">
-                <h1>RoleFit</h1>
-            </div>
+
+<!-- ===== Navigation ===== -->
+<nav class="navbar">
+  <div class="container">
+    <a href="/" class="navbar-brand">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="8" width="64" height="64" rx="16" stroke="#4f46e5" stroke-width="3"/>
+        <path d="M28 52V30l12 10 12-10v22" stroke="#4f46e5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="40" cy="26" r="4" fill="#7c3aed"/>
+      </svg>
+      <span>RoleFit</span>
+    </a>
+    <div class="nav-links">
+      <a href="/" class="nav-cta">← New Analysis</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Results ===== -->
+<section class="results-page">
+  <div class="container">
+
+    <div class="results-header gs-reveal">
+      <h1>Your Match Analysis</h1>
+      <p>Here's how your resume stacks up against this role</p>
+    </div>
+
+    <!-- Score Ring -->
+    <div class="score-section gs-reveal">
+      <div class="score-ring">
+        <svg viewBox="0 0 160 160">
+          <defs>
+            <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4f46e5"/>
+              <stop offset="100%" stop-color="#7c3aed"/>
+            </linearGradient>
+          </defs>
+          <circle class="ring-bg" cx="80" cy="80" r="70"/>
+          <circle class="ring-fill" cx="80" cy="80" r="70" stroke="url(#scoreGradient)"
+                  stroke-dasharray="440"
+                  stroke-dashoffset="440"/>
+        </svg>
+        <div class="score-value">{{ score }}</div>
+      </div>
+      <div class="score-label">Match Score</div>
+    </div>
+
+    <!-- Analysis + Cover Letter -->
+    <div class="results-grid">
+      <div class="result-card gs-reveal">
+        <h2>📊 Analysis</h2>
+        <div class="result-content">
+          <pre class="formatted-text">{{ explanation }}</pre>
         </div>
-    </header>
-    <section class="results-container">
-        <div class="container">
-            <div class="results-header">
-                <h1>Your Match Analysis</h1>
-                <p>Here's what we found about your fit for this role</p>
-            </div>
-            <div class="score-card">
-                <div class="score-circle">
-                    <svg viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="45" class="score-bg"></circle>
-                        <circle cx="50" cy="50" r="45" class="score-fill" style="stroke-dashoffset: calc(283 - 283 * {{ score }} / 100);"></circle>
-                    </svg>
-                    <div class="score-text">{{ score }}%</div>
-                </div>
-                <div class="score-label">Match Score</div>
-            </div>
-            <div class="results-grid">
-                <div class="result-card">
-                    <h2>Analysis</h2>
-                    <div class="result-content">
-                        <pre class="formatted-text">{{ explanation }}</pre>
-                    </div>
-                </div>
-                <div class="result-card">
-                    <h2>Your Personalized Cover Letter</h2>
-                    <div class="result-content">
-                        <pre class="formatted-text">{{ cover_letter }}</pre>
-                    </div>
-                </div>
-            </div>
-            <div class="action-buttons">
-                <button class="button-primary" onclick="window.print()">Print Results</button>
-                <button class="button-secondary" onclick="window.location.href='/'">Try Another</button>
-            </div>
+      </div>
+      <div class="result-card gs-reveal">
+        <h2>✍️ Personalized Cover Letter</h2>
+        <div class="result-content">
+          <pre class="formatted-text">{{ cover_letter }}</pre>
         </div>
-    </section>
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 RoleFit. Empowering careers with AI.</p>
-        </div>
-    </footer>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="action-bar gs-reveal">
+      <button class="btn btn-primary" onclick="window.print()">Print Results</button>
+      <a href="/" class="btn btn-ghost">Try Another Role</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>&copy; 2026 RoleFit. All rights reserved.</span>
+      <span>Built with AI · Designed for humans</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== Scripts ===== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="/static/js/main.js"></script>
 </body>
 </html>
