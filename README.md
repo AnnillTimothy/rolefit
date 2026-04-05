@@ -115,4 +115,4 @@ This project is provided as-is for personal and educational use.
 
 ---
 
-<sub>Built with ♥ and AI</sub>
+<sub>Front end by Claude, back end by me and GPT(annilltimothy.dev/margaret)</sub>
