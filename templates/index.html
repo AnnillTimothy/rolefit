@@ -1,106 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RoleFit - Analyze your resume fit for job positions with AI-powered insights, personalized cover letters, and match scoring.">
-    <meta name="keywords" content="resume analyzer, job match, career analysis, cover letter generator">
-    <meta property="og:title" content="RoleFit - Your AI-Powered Career Match Platform">
-    <meta property="og:description" content="Discover how well your resume matches job opportunities with AI-powered analysis.">
-    <meta property="og:type" content="website">
-    <meta name="theme-color" content="#1e40af">
-    <title>RoleFit - AI Resume & Job Match Analyzer</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RoleFit — AI-powered resume and job match analysis. Upload your resume, get a match score, insights, and a tailored cover letter in seconds.">
+  <meta name="keywords" content="resume analyzer, job match, AI career analysis, cover letter generator, role fit">
+  <meta property="og:title" content="RoleFit — Know Your Fit">
+  <meta property="og:description" content="AI-powered resume match scoring, insights and cover letter generation.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#4f46e5">
+  <title>RoleFit — Know Your Fit</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-<header class="navbar">
-    <div class="container">
-        <div class="navbar-brand">
-            <h1>RoleFit</h1>
-        </div>
-        <nav class="nav-links">
-            <a href="#features">Features</a>
-            <a href="#how-it-works">How It Works</a>
-        </nav>
+
+<!-- ===== Loading Screen (once per session) ===== -->
+<div class="loading-screen" id="loading-screen">
+  <div class="loading-logo-container">
+    <!-- Animated SVG Logo -->
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect class="logo-draw" x="8" y="8" width="64" height="64" rx="16" stroke="#4f46e5" stroke-width="3"/>
+      <path class="logo-draw" d="M28 52V30l12 10 12-10v22" stroke="#4f46e5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:.4s"/>
+      <circle class="logo-fill-anim" cx="40" cy="26" r="4" fill="#7c3aed"/>
+    </svg>
+  </div>
+  <span class="loading-text">RoleFit</span>
+</div>
+
+<!-- ===== Analyzing Overlay (shows while AI works) ===== -->
+<div class="analyzing-overlay" id="analyzing-overlay">
+  <div class="analyzing-logo breathing">
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="8" y="8" width="64" height="64" rx="16" stroke="#4f46e5" stroke-width="3"/>
+      <path d="M28 52V30l12 10 12-10v22" stroke="#4f46e5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="40" cy="26" r="4" fill="#7c3aed"/>
+    </svg>
+  </div>
+  <span class="analyzing-text">Analyzing your fit<span class="analyzing-dots"></span></span>
+</div>
+
+<!-- ===== Navigation ===== -->
+<nav class="navbar">
+  <div class="container">
+    <a href="/" class="navbar-brand">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="8" width="64" height="64" rx="16" stroke="#4f46e5" stroke-width="3"/>
+        <path d="M28 52V30l12 10 12-10v22" stroke="#4f46e5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="40" cy="26" r="4" fill="#7c3aed"/>
+      </svg>
+      <span>RoleFit</span>
+    </a>
+    <div class="nav-links">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#analyze" class="nav-cta">Get Started →</a>
     </div>
-</header>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
 <section class="hero">
-    <div class="container hero-content">
-        <div class="hero-text">
-            <h1>Your AI-Powered Career Match Platform</h1>
-            <p>Analyze your resume against job descriptions. Get insights, match scores, and AI-generated cover letters in seconds.</p>
-            <button class="cta-button" onclick="document.querySelector('.upload-section').scrollIntoView({behavior: 'smooth'})">Get Started</button>
-        </div>
-        <div class="hero-visual">
-            <div class="floating-card card-1"><span>95% Match</span></div>
-            <div class="floating-card card-2"><span>Cover Letter Ready</span></div>
-            <div class="floating-card card-3"><span>Instant Analysis</span></div>
-        </div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        AI-Powered Career Matching
+      </div>
+      <h1>Know your fit<br>before you <span class="gradient-text">apply.</span></h1>
+      <p class="hero-subtitle">Upload your resume and a job description. Get an instant match score, honest insights, and a tailored cover letter — all in seconds.</p>
+      <div class="hero-actions">
+        <a href="#analyze" class="btn btn-primary">Analyze My Fit</a>
+        <a href="#how-it-works" class="btn btn-ghost">Learn More</a>
+      </div>
     </div>
+  </div>
 </section>
-<section class="upload-section" id="features">
-    <div class="container">
-        <h2>Analyze Your Fit</h2>
-        <div class="form-container">
-            <form action="/analyze" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="resume">Upload Your Resume (PDF)</label>
-                    <input type="file" id="resume" name="resume" accept=".pdf" required>
-                    <div class="file-hint">Max 10MB • PDF format</div>
-                </div>
-                <div class="form-group">
-                    <label for="job_input">Job Description or URL</label>
-                    <textarea id="job_input" name="job_input" rows="8" placeholder="Paste the job description or enter a URL..." required></textarea>
-                </div>
-                <button type="submit" class="submit-button">Analyze Match</button>
-            </form>
-        </div>
+
+<!-- ===== Stats ===== -->
+<section class="stats-bar gs-reveal">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <h3>3</h3>
+        <p>Simple steps</p>
+      </div>
+      <div class="stat-item">
+        <h3>&lt;30s</h3>
+        <p>Average analysis time</p>
+      </div>
+      <div class="stat-item">
+        <h3>100%</h3>
+        <p>AI-powered insights</p>
+      </div>
     </div>
+  </div>
 </section>
-<section class="features" id="how-it-works">
-    <div class="container">
-        <h2>How It Works</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">📄</div>
-                <h3>Upload Resume</h3>
-                <p>Submit your PDF resume for analysis</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3>Add Job Details</h3>
-                <p>Paste job description or URL</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h3>AI Analysis</h3>
-                <p>Get instant AI-powered insights</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Match Score</h3>
-                <p>See your compatibility percentage</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">✍️</div>
-                <h3>Cover Letter</h3>
-                <p>Get personalized cover letter</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💡</div>
-                <h3>Recommendations</h3>
-                <p>Get actionable improvements</p>
-            </div>
-        </div>
+
+<!-- ===== How It Works ===== -->
+<section class="how-section" id="how-it-works">
+  <div class="container">
+    <div class="how-header gs-reveal">
+      <h2>How It Works</h2>
+      <p>Three steps. Zero guesswork.</p>
     </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Upload Resume</h3>
+        <p>Drop your PDF resume. We extract every detail using advanced parsing.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Add the Job</h3>
+        <p>Paste the job description or a URL. We pull out what matters.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Get Your Score</h3>
+        <p>Receive a match score, detailed analysis, and a tailored cover letter.</p>
+      </div>
+    </div>
+  </div>
 </section>
+
+<!-- ===== Analyze Section ===== -->
+<section class="analyze-section" id="analyze">
+  <div class="container">
+    <div class="analyze-header gs-reveal">
+      <h2>Analyze Your Fit</h2>
+      <p>Upload your resume and paste a job description to get started.</p>
+    </div>
+    <div class="form-card">
+      <form action="/analyze" method="POST" enctype="multipart/form-data" class="analyze-form">
+        <div class="form-group">
+          <label for="resume">Resume</label>
+          <div class="file-upload-area">
+            <input type="file" id="resume" name="resume" accept=".pdf" required>
+            <div class="file-upload-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="12" y1="18" x2="12" y2="12"/>
+                <line x1="9" y1="15" x2="15" y2="15"/>
+              </svg>
+            </div>
+            <p class="file-upload-text"><strong>Click to upload</strong> or drag and drop</p>
+            <p class="hint">PDF only · Max 10MB</p>
+          </div>
+          <div class="file-name-display" id="file-name"></div>
+        </div>
+        <div class="form-group">
+          <label for="job_input">Job Description</label>
+          <textarea id="job_input" name="job_input" placeholder="Paste the full job description or a direct URL…" required></textarea>
+          <p class="hint">You can paste text or a URL to the job posting</p>
+        </div>
+        <button type="submit" class="submit-btn">Analyze Match →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
 <footer class="footer">
-    <div class="container">
-        <p>&copy; 2026 RoleFit. Empowering careers with AI.</p>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-name">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="64" height="64" rx="16" stroke="#4f46e5" stroke-width="3"/>
+            <path d="M28 52V30l12 10 12-10v22" stroke="#4f46e5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="40" cy="26" r="4" fill="#7c3aed"/>
+          </svg>
+          <span>RoleFit</span>
+        </div>
+        <p>AI-powered career match analysis. Know your fit before you apply.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#" data-modal="terms-modal">Terms &amp; Conditions</a></li>
+          <li><a href="#" data-modal="privacy-modal">Privacy</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#analyze">Analyze</a></li>
+        </ul>
+      </div>
     </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 RoleFit. All rights reserved.</span>
+      <span>Built with AI · Designed for humans</span>
+    </div>
+  </div>
 </footer>
+
+<!-- ===== Terms Modal ===== -->
+<div class="modal-overlay" id="terms-modal">
+  <div class="modal">
+    <h2>Terms &amp; Conditions</h2>
+    <p>Last updated: April 2026</p>
+
+    <h3>1. Acceptance of Terms</h3>
+    <p>By accessing and using RoleFit, you agree to be bound by these Terms and Conditions. If you do not agree, please do not use the service.</p>
+
+    <h3>2. Service Description</h3>
+    <p>RoleFit provides AI-powered resume and job description analysis for informational purposes. Results are generated by artificial intelligence and should be used as guidance, not as professional career advice.</p>
+
+    <h3>3. User Responsibilities</h3>
+    <ul>
+      <li>You must provide accurate information when using the service.</li>
+      <li>You are responsible for the content of any documents you upload.</li>
+      <li>You agree not to use the service for any unlawful purpose.</li>
+    </ul>
+
+    <h3>4. Data Handling</h3>
+    <p>Uploaded documents are processed in real-time and are not permanently stored. We do not sell or share your personal data with third parties. See our Privacy Policy for more details.</p>
+
+    <h3>5. Intellectual Property</h3>
+    <p>All content, design, and technology on RoleFit are owned by RoleFit. Generated cover letters and analyses are provided for your personal use.</p>
+
+    <h3>6. Disclaimer</h3>
+    <p>RoleFit is provided "as is" without warranties of any kind. We do not guarantee employment outcomes or the accuracy of AI-generated analyses.</p>
+
+    <h3>7. Limitation of Liability</h3>
+    <p>RoleFit shall not be liable for any damages arising from the use of this service, including but not limited to missed job opportunities or reliance on AI-generated content.</p>
+
+    <h3>8. Changes to Terms</h3>
+    <p>We reserve the right to modify these terms at any time. Continued use of the service constitutes acceptance of updated terms.</p>
+
+    <button class="modal-close">Close</button>
+  </div>
+</div>
+
+<!-- ===== Privacy Modal ===== -->
+<div class="modal-overlay" id="privacy-modal">
+  <div class="modal">
+    <h2>Privacy Policy</h2>
+    <p>Last updated: April 2026</p>
+
+    <h3>Data We Collect</h3>
+    <p>RoleFit processes the resume and job description you provide during each analysis session. We do not require account creation or collect personal identifiers beyond what is in your uploaded documents.</p>
+
+    <h3>How We Use Data</h3>
+    <ul>
+      <li>To perform AI-powered analysis and generate results.</li>
+      <li>To improve service quality and accuracy.</li>
+    </ul>
+
+    <h3>Data Retention</h3>
+    <p>Uploaded files and analysis results are processed in memory and are not permanently stored on our servers.</p>
+
+    <h3>Third-Party Services</h3>
+    <p>We use third-party AI APIs to process analyses. Data sent to these services is subject to their respective privacy policies.</p>
+
+    <h3>Your Rights</h3>
+    <p>You may contact us to request information about any data associated with your use of the service.</p>
+
+    <button class="modal-close">Close</button>
+  </div>
+</div>
+
+<!-- ===== Scripts ===== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-niUdRyrCaf6SnX1ZF4WZhrCm/beT427pALZinGk0SqCwUaoXYMcF9WeAhp2pYhaeWjNxTki6kELfA2KfApZOuA==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-aFuR0LufMyr+rFGU/Jc3f6ZjBsiwEbV0N/3gQLWJQ1XUGAGKldzEsPjRiI/12bITQq1dwj0R3DE9ZyIQQrkCLg==" crossorigin="anonymous"></script>
+<script src="/static/js/main.js"></script>
 </body>
 </html>

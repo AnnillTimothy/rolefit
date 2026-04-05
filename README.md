@@ -1,63 +1,118 @@
 # RoleFit
 
-## Project Overview
-RoleFit is a project designed to streamline the process of managing roles and permissions within applications. It provides an intuitive interface and powerful backend logic to ensure that users can be assigned the correct roles efficiently.
+> **Know your fit before you apply.**
+
+RoleFit is an AI-powered career match platform built with Flask. Upload your resume (PDF), paste a job description (or URL), and receive an instant match score, honest analysis, and a tailored cover letter — all in seconds.
+
+---
 
 ## Features
-- Role management: Create, edit, delete roles.
-- User assignment: Assign roles to users seamlessly.
-- Permission control: Define what each role can do.
-- Audit logs: Track changes to roles and assignments.
-- RESTful API: Access functionalities via a well-documented API.
 
-## Setup Instructions
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/AnnillTimothy/rolefit.git
-   ```
-2. Navigate into the directory:
-   ```bash
-   cd rolefit
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Start the development server:
-   ```bash
-   npm start
-   ```
+- **Match Scoring** — Weighted algorithm evaluates skills, experience, education, and industry alignment.
+- **AI Analysis** — Brutally honest breakdown of strengths, gaps, and competitiveness.
+- **Cover Letter Generation** — Personalized, non-generic cover letter tailored to the specific role.
+- **PDF Parsing** — Extracts text from uploaded PDF resumes using `pdfplumber`.
+- **URL Extraction** — Optionally paste a job posting URL instead of raw text.
+- **Minimalist UI** — Clean, whitespace-driven design with GSAP scroll animations.
+- **Loading Experience** — Animated SVG logo on first load; breathing logo overlay during analysis.
 
-## Environment Variables
-Make sure to set the following environment variables in your `.env` file:
-- `DATABASE_URL`: The URL for connecting to the database.
-- `JWT_SECRET`: A secret key for signing JWTs.
-- `PORT`: The port on which the application will run (default is 3000).
+---
 
-## Usage Guide
-After setting up the application, you can access the API endpoints via:
-- `GET /api/roles`: Retrieve a list of roles.
-- `POST /api/roles`: Create a new role.
-- `PUT /api/roles/:id`: Update an existing role.
-- `DELETE /api/roles/:id`: Delete a role.
+## Tech Stack
 
-For a more detailed usage guide, please refer to the API documentation.
+| Layer     | Technology                          |
+|-----------|-------------------------------------|
+| Backend   | Python · Flask                      |
+| AI        | Mistral AI (`mistral-large-latest`) |
+| PDF       | pdfplumber                          |
+| Scraping  | BeautifulSoup · requests            |
+| Frontend  | HTML · CSS · Vanilla JS · GSAP     |
+| Fonts     | Inter (Google Fonts)                |
 
-## Contribution Guidelines
-We welcome contributions to RoleFit! Here’s how you can contribute:
-1. Fork the repository.
-2. Create a new branch for your feature or fix:
-   ```bash
-   git checkout -b feature/YourFeature
-   ```
-3. Make your changes and commit them:
-   ```bash
-   git commit -m "Add a new feature"
-   ```
-4. Push to the branch:
-   ```bash
-   git push origin feature/YourFeature
-   ```
-5. Open a pull request with a detailed description of your changes.
+---
 
-Thank you for contributing to RoleFit!
+## Getting Started
+
+### Prerequisites
+
+- Python 3.9+
+- A [Mistral AI](https://mistral.ai) API key
+
+### Installation
+
+```bash
+git clone https://github.com/AnnillTimothy/rolefit.git
+cd rolefit
+pip install -r requirements.txt
+```
+
+### Environment Variables
+
+Create a `.env` file in the project root:
+
+```
+MISTRAL_API_KEY=your_mistral_api_key_here
+SECRET_KEY=your_secret_key_here
+```
+
+### Run
+
+```bash
+python application.py
+```
+
+Open [http://localhost:5000](http://localhost:5000) in your browser.
+
+---
+
+## Project Structure
+
+```
+rolefit/
+├── application.py          # Flask app — routes, AI calls, scoring logic
+├── requirements.txt        # Python dependencies
+├── static/
+│   ├── css/
+│   │   └── styles.css      # Complete design system
+│   └── js/
+│       └── main.js         # GSAP animations, UI interactions
+├── templates/
+│   ├── index.html          # Landing page + upload form
+│   └── result.html         # Results page (score, analysis, cover letter)
+└── README.md
+```
+
+---
+
+## How It Works
+
+1. **Upload** your PDF resume.
+2. **Paste** a job description or URL.
+3. **Receive** a match score (0–100), detailed analysis, and a tailored cover letter.
+
+The scoring algorithm weights:
+- Required skills match (40%)
+- Preferred skills match (10%)
+- Years of experience (25%)
+- Education alignment (5%)
+- Industry overlap (10%)
+
+---
+
+## License
+
+This project is provided as-is for personal and educational use.
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+<sub>Built with ♥ and AI</sub>
